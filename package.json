@@ -1,0 +1,46 @@
+{
+  "name": "@template/basic",
+  "version": "1.0.0",
+  "description": "The react base application.",
+  "private": true,
+  "scripts": {
+    "start": "kkt start",
+    "build": "kkt build",
+    "test": "kkt test --env=jsdom",
+    "coverage": "kkt test --env=jsdom --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kktjs/kkt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/css": "^11.9.0",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "react": "~18.0.0",
+    "react-dom": "~18.0.0",
+    "@wcj/dark-mode": "^1.0.14",
+    "styled-components": "^5.3.5",
+    "web-vitals": "^2.1.2"
+  },
+  "devDependencies": {
+    "@kkt/less-modules": "~7.1.1",
+    "@kkt/raw-modules": "~7.1.1",
+    "kkt": "7.1.7"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
