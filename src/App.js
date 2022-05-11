@@ -12,7 +12,7 @@ function App() {
     }
   `
 
-  const button = css`
+  const marginTop = css`
     margin-top: 20px;
   `
 
@@ -24,13 +24,13 @@ function App() {
   return (
     <div className={appStyle}>
       <dark-mode permanent></dark-mode>
-      <div className={cx(cals, button, "one")} >
-        This has a hotpink background.
+      <div className={cx(cals, marginTop, "one")} >
+        第一个块测试{count}
       </div>
       <div className="dot" >
-        测试页面
+        第二个块测试{count}
       </div>
-      <button className={button} onClick={() => setCount(count + 1)} >点击变换值</button>
+      <button className={marginTop} onClick={() => setCount(count + 1)} >点击变换值</button>
     </div>
   );
 }
