@@ -63,8 +63,7 @@ const buttonVariant = (color: string, background: string, focus?: boolean, activ
     &:hover {
       background-color: ${Color(background).lighten(0.42).string()} !important;
     }
-    &:active,
-    &.active {
+    &:active {
       color: ${background};
       background-color: ${Color(background).lighten(0.32).string()} !important;
       background-image: none;
