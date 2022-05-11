@@ -5,8 +5,7 @@ export const Button = styled.button`
   padding: 0.5rem 0;
   margin: 0.5rem 1rem;
   width: 18rem;
-  background:${(props) => {
-    console.log(props)
+  background:${(props: { theme: { main: any } }) => {
     return props.theme.main
   }}
 `

@@ -23,8 +23,7 @@ const GlobalStyle = createGlobalStyle`
   --color-text-bg: #fffefe08;
 }
 `
-
-ReactClient.createRoot(document.getElementById('root')).render(
+ReactClient.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider
       theme={{
