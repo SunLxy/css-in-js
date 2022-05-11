@@ -2,10 +2,10 @@ import React from 'react';
 import ReactClient from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { injectGlobal } from '@emotion/css'
+import { createGlobalStyle, ThemeProvider } from "styled-components"
 import "./index.css"
 
-injectGlobal`
+const GlobalStyle = createGlobalStyle`
 [data-color-mode*="light"],
 [data-color-mode*="light"] body {
   --color-header-bg: aqua;
@@ -26,7 +26,14 @@ injectGlobal`
 
 ReactClient.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App style={{ border: "3px solid var(--color-header-bg2)" }} />
+    <ThemeProvider
+      theme={{
+        main: "var(--color-header-bg,mediumseagreen)"
+      }}>
+      <App style={{ border: "3px solid var(--color-header-bg2)" }} />
+      <GlobalStyle />
+    </ThemeProvider>
+
   </React.StrictMode>,
 );
 // If you want to start measuring performance in your app, pass a function
