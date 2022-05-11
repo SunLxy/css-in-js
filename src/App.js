@@ -2,7 +2,7 @@ import React from "react";
 import '@wcj/dark-mode';
 import { css, cx } from '@emotion/css'
 
-function App() {
+function App(props) {
   const [count, setCount] = React.useState(1)
   const color = 'darkgreen'
   const cals = css`
@@ -20,11 +20,12 @@ function App() {
   width:920px;
   margin:0 auto;
   `
+  const styles = css(props.style)
 
   return (
     <div className={appStyle}>
       <dark-mode permanent></dark-mode>
-      <div className={cx(cals, marginTop, "one")} >
+      <div className={cx(cals, marginTop, styles, "one")} >
         第一个块测试{count}
       </div>
       <div className="dot" >

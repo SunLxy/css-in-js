@@ -26,7 +26,7 @@ injectGlobal`
 
 ReactClient.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <App style={{ border: "3px solid var(--color-header-bg2)" }} />
   </React.StrictMode>,
 );
 // If you want to start measuring performance in your app, pass a function
