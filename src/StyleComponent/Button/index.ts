@@ -4,8 +4,8 @@ export type ButtonType = 'primary' | 'success' | 'warning' | 'danger' | 'light' 
 export type ButtonSize = 'large' | 'default' | 'small';
 
 export interface ButtonProps {
-  fontSize?: string;
-  borderWidth?: string;
+  fontSize?: string | number;
+  borderWidth?: string | number;
   borderColor?: string;
   types?: ButtonType;
   basic?: boolean;
@@ -16,6 +16,14 @@ export interface ButtonProps {
   block?: boolean;
   focus?: boolean
 }
+
+const setNumberToString = (value: number | string | undefined, unit: string = "px") => {
+  if (typeof value === "number") {
+    return `${value}` + unit
+  }
+  return value
+}
+
 
 const buttonVariant = (color: string, background: string, focus?: boolean, active?: boolean, disabled?: boolean, basic?: boolean) => {
   return css`
@@ -236,7 +244,7 @@ position: relative;
 vertical-align: middle;
 text-align: left;
 line-height: 14px;
-font-size: ${(props) => props.fontSize};
+font-size: ${(props) => setNumberToString(props.fontSize)};
 min-width: 30px;
 min-height: 30px;
 text-align: center;
@@ -290,6 +298,7 @@ Button.defaultProps = {
   fontSize: "16px",
   borderWidth: "5px",
   borderColor: "red",
+
   style: {},
   types: "light",
   size: "default",
@@ -298,5 +307,36 @@ Button.defaultProps = {
   block: false,
   basic: false,
   loadings: false,
+  /** 主题 **/
+  theme: {
+    /***
+     * 1. css 变量命名 basics + css属性 + 类型(警告/成功/危险...)
+     *  --basics-font-color-primary:red
+     * **/
+
+    /**
+     * 2. 主题变量名称(组件内部接收的变量名)： css属性 + 类型(警告/成功/危险...)
+     * 
+     * import { ThemeProvider } from "styled-components"
+     *  <ThemeProvider
+     *    theme={{
+     *      fontColorPrimary: "var(--basics-font-color-primary)"
+     *    }}
+     *  >
+     *    <App />
+     *  </ThemeProvider>
+     * 
+     * **/
+    // 1.  fontColorPrimary:"red"
+    // 2.  borderColorPrimary:"red"
+    fontColorPrimary: "red",
+    colorPrimary: "red"
+
+    /**
+     * 3. 默认值问题
+     * **/
+
+  }
+
 }
 export default Button

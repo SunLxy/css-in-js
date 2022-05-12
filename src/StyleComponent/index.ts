@@ -17,9 +17,10 @@ Button.defaultProps = {
 }
 
 export const P = styled.p`
-  border:1px solid red;
+  border:1px solid var(--color-header-bg2);
   padding:10px;
   margin:10px 0px;
   border-radius:10px;
+  color:var(--color-header-bg2)
 `
 

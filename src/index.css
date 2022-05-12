@@ -1,3 +1,20 @@
+[data-color-mode*="light"],
+[data-color-mode*="light"] body {
+  --color-header-bg: aqua;
+  --color-header-bg2: red;
+  --color-header-border: #d3d3d3;
+  --color-hover: #0000001a;
+  --color-text-bg: #00000008;
+}
+[data-color-mode*="dark"],
+[data-color-mode*="dark"] body {
+  --color-header-bg: red;
+  --color-header-bg2: aqua;
+  --color-header-border: #21262d;
+  --color-hover: #ffffff1c;
+  --color-text-bg: #fffefe08;
+}
+
 .dot {
   margin-top: 20px;
   background-color: var(--color-header-bg2, hotpink);
@@ -5,4 +22,8 @@
 
 .one {
   padding: 10px;
+}
+.body {
+  width: 920px;
+  margin: 0 auto;
 }

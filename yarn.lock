@@ -19,6 +19,11 @@
     jsonpointer "^5.0.0"
     leven "^3.1.0"
 
+"@arco-design/theme-line@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.npmmirror.com/@arco-design/theme-line/-/theme-line-0.0.3.tgz#67d92a5cda2de380e4b2cd43b60321fca90bed06"
+  integrity sha512-yJ3mCCreQ3pc9As98DFX9BcYj4hY7YGFnq2sJjR9LIMTJwD5Usm9o8J0+hHbYgXaImXLJWe/H0e/RivSsHxFcQ==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.8.3":
   version "7.16.7"
   resolved "https://registry.npmmirror.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
