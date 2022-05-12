@@ -17,6 +17,7 @@
 
 .dot {
   margin-top: 20px;
+  color: var(--color-header-bg);
   background-color: var(--color-header-bg2, hotpink);
 }
 

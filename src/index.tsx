@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from "styled-components"
 import "./index.css"
 // import { createGlobalStyle, } from "styled-components"
-import "./index.css"
+
 // const GlobalStyle = createGlobalStyle`
 // [data-color-mode*="light"],
 // [data-color-mode*="light"] body {
@@ -25,14 +25,15 @@ import "./index.css"
 // }
 // `
 
+
 ReactClient.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider
       theme={{
-        main: "var(--color-header-bg,mediumseagreen)"
+        main: "var(--color-header-bg,mediumseagreen)",
+        buttonFontColor: "var(--dark-color-header-bg)"
       }}>
       <App />
-      {/* <GlobalStyle/> */}
     </ThemeProvider>
   </React.StrictMode>,
 );
