@@ -13,7 +13,7 @@ function App() {
       <div className="one" >
         第一个块测试{count}
       </div>
-      <Theme theme={themeJson} >
+      <Theme cssVariable={themeJson}>
         <div className="dot" >
           第二个块测试{count}
         </div>
