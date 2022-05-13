@@ -23,6 +23,7 @@ function App() {
       <Button style={{ color: "red" }} >测试button按钮</Button>
       <Button size="large"  >测试button按钮</Button>
       <Button types="primary" >测试button按钮</Button>
+      <Button types="light" focus >测试light按钮</Button>
       <Button disabled >测试button按钮</Button>
       <Button types="danger" >测试button按钮</Button>
       <Button types="success" >测试button按钮</Button>

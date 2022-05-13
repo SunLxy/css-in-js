@@ -24,6 +24,15 @@ const setNumberToString = (value: number | string | undefined, unit: string = "p
   return value
 }
 
+const getCommonCss = (style: string, attrName: string, fig?: boolean, lastName?: string) => {
+  const com = css`
+    ${attrName}{${style}}
+    ${fig && lastName && `${lastName}{${style}}`}
+    ${fig && !lastName && style}
+  `
+  return com
+}
+
 
 const buttonVariant = (color: string, background: string, focus?: boolean, active?: boolean, disabled?: boolean, basic?: boolean) => {
   return css`
@@ -33,37 +42,25 @@ const buttonVariant = (color: string, background: string, focus?: boolean, activ
   &:hover {
     background-color: ${Color(background).darken(0.1).string()};
   }
-  &:focus{
+  ${() => getCommonCss(`
     outline: 0;
     box-shadow: 0 0 0 2px ${Color(background).fade(74).string()};
-  }
-  ${() => focus && css`
-    outline: 0;
-    box-shadow: 0 0 0 2px ${Color(background).fade(74).string()};
-  `}
+  `, " &:focus", focus)}
   &:hover {
     color: ${color};
     background-color: ${Color(background).darken(0.1).string()};
     z-index: 2;
   }
-  &:active {
+  ${() => getCommonCss(`
     color: ${color};
     background-color: ${Color(background).darken(0.2).string()};
     background-image: none;
-  }
-  ${() => active && css`
-    color: ${color};
-    background-color: ${Color(background).darken(0.2).string()};
-    background-image: none;
-  `}
-  &[disabled] {
-    background-color:${Color(background).lighten(0.2).string()};
+  `, " &:active", active)}
+  ${() => getCommonCss(`
+    background-color: ${Color(background).lighten(0.2).string()};
     z-index: 0;
-  }
-  ${() => disabled && css`
-     background-color: ${Color(background).lighten(0.2).string()};
-    z-index: 0;
-  `}
+  `, " &[disabled]", disabled)}
+
   ${() => basic && css`
     background-color: transparent !important;
     box-shadow: inset 0 0 0 #000;
@@ -71,27 +68,21 @@ const buttonVariant = (color: string, background: string, focus?: boolean, activ
     &:hover {
       background-color: ${Color(background).lighten(0.42).string()} !important;
     }
-    &:active {
+    ${() => getCommonCss(`
       color: ${background};
       background-color: ${Color(background).lighten(0.32).string()} !important;
       background-image: none;
-    }
-    ${() => active && css`
-      color: ${background};
-      background-color: ${Color(background).lighten(0.32).string()} !important;
-      background-image: none;
-    `}
-    ${() => disabled && css`
+    `, " &:active", active)}
+
+    ${() => getCommonCss(`
       background-color: transparent !important;
       color:  ${Color(background).lighten(0.1).string()};
-    `}
-    &[disabled] {
-      background-color: transparent !important;
-      color:  ${Color(background).lighten(0.1).string()};
-    }
+    `, "&[disabled]", disabled)}
+
   `}
   `
 }
+
 
 const buttonTypeCss = (props: ButtonProps) => {
   const { types, disabled, active, focus, basic } = props
@@ -109,16 +100,11 @@ const buttonTypeCss = (props: ButtonProps) => {
         box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.17), inset 1px -1px 0 0 rgba(0, 0, 0, 0.17),
         inset -1px 0px 0 0 rgba(0, 0, 0, 0.17);
         ${() => buttonVariant("#393e48", "#f8f9fa", focus, active, disabled, basic)}
-        &:focus{
+        ${() => getCommonCss(`
           outline: 0;
           box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.17), inset 1px -1px 0 0 rgba(0, 0, 0, 0.17),
             inset -1px 0px 0 0 rgba(0, 0, 0, 0.17), 0 0 0 2px rgba(0, 0, 0, 0.1);
-        }
-        ${() => focus && css`
-          outline: 0;
-          box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.17), inset 1px -1px 0 0 rgba(0, 0, 0, 0.17),
-            inset -1px 0px 0 0 rgba(0, 0, 0, 0.17), 0 0 0 2px rgba(0, 0, 0, 0.1);
-        `}
+        `, "&:focus", focus)}
         ${() => basic && css`
           color: #9199a7;
           &:focus{
@@ -132,34 +118,20 @@ const buttonTypeCss = (props: ButtonProps) => {
           &:hover {
             background-color:  ${Color("#9199a7").lighten(0.32).string()} !important;
           }
-          &:active {
-            color: #9199a7;
-            background-color:  ${Color("#9199a7").lighten(0.24).string()} !important;
-            background-image: none;
-          }
-          ${() => active && css`
-            color: #9199a7;
-            background-color: ${Color("#9199a7").lighten(0.24).string()} !important;
-            background-image: none;
-          `}
-          &[disabled] {
+          ${() => getCommonCss(`
+              color: #9199a7;
+              background-color: ${Color("#9199a7").lighten(0.24).string()} !important;
+              background-image: none;
+          `, "&:active", active)}
+          ${() => getCommonCss(`
             background-color: transparent !important;
             color: ${Color("#9199a7").lighten(0.1).string()};
-          }
-          ${() => disabled && css`
-            background-color: transparent !important;
-            color: ${Color("#9199a7").lighten(0.1).string()};
-          `}
+          `, "&[disabled]", disabled)}
         `}
-
-        &[disabled] {
-          color:${Color("#393e48").darken(0.2).string()} ;
-          z-index: 0;
-        }
-        ${() => disabled && css`
-          color:${Color("#393e48").darken(0.2).string()} ;
-          z-index: 0;
-        `}   
+         ${() => getCommonCss(`
+            color:${Color("#393e48").darken(0.2).string()} ;
+            z-index: 0;
+          `, "&[disabled]", disabled)}
       `
     case "link":
       return css`
@@ -169,21 +141,14 @@ const buttonTypeCss = (props: ButtonProps) => {
           color: ${Color("#008ef0").darken(0.12).string()};
           text-decoration: underline;
         }
-        &:not([disabled]):active{
-          color:${Color("#008ef0").darken(0.32).string()};
-          box-shadow: none;
-          text-decoration: underline;
-        }
-        ${() => active && css`
-          &:not([disabled]) {
+        ${() => getCommonCss(`
             color:${Color("#008ef0").darken(0.32).string()};
             box-shadow: none;
             text-decoration: underline;
-          }
-        `}
+          `, "&:not([disabled]):active", disabled, "&:not([disabled]) ")}
         &[disabled] {
           z-index: 0;
-        }  
+        }
         ${() => disabled && css`
           z-index: 0;
         `}   
