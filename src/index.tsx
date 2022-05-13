@@ -31,7 +31,8 @@ ReactClient.createRoot(document.getElementById('root')!).render(
     <ThemeProvider
       theme={{
         main: "var(--color-header-bg,mediumseagreen)",
-        buttonFontColor: "var(--dark-color-header-bg)"
+        buttonFontColor: "var(--dark-color-header-bg)",
+        fontSize: "var(--font-size)"
       }}>
       <App />
     </ThemeProvider>

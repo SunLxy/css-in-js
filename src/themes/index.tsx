@@ -1,25 +1,16 @@
 import React from "react";
 
 export interface ThemeProps {
-  theme?: Record<string, object | string | number>
+  /** 主题变量 **/
+  theme?: Record<string, string | number>
+  /** 创建的标签名 **/
+  TagName?: string | React.FunctionComponent<any> | React.ComponentClass<{}, any>
+  className?: string
   children?: React.ReactNode;
 }
-
-const getThemeToStyle = (theme: ThemeProps["theme"], style: any = {}) => {
-  if (typeof theme === "object") {
-    Object.entries(theme).forEach(([key, item]) => {
-      style[key] = item
-    })
-  }
-  return style;
-}
-
 const Theme = (props: ThemeProps) => {
-  const { theme, children } = props
-  const styles = getThemeToStyle(theme)
-  console.log("styles", styles)
-  return <div style={styles} >
-    {children}
-  </div>
+  const { theme, children, TagName = "div", className } = props
+  return React.createElement(TagName, { className, style: theme }, children)
 }
+
 export default Theme
