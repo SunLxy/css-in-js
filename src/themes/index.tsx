@@ -20,8 +20,10 @@ export interface ThemeProps {
 }
 
 const transformationHump = (value: string) => {
+  const Reg = new RegExp(`^${"--w-"}`)
+
   // eslint-disable-next-line no-useless-escape
-  return value.replace(/^--w-/, "").replace(/\-(\w)/g, function (all, letter) {
+  return value.replace(Reg, "").replace(/\-(\w)/g, function (all, letter) {
     return letter.toUpperCase();
   });
 }
@@ -44,12 +46,13 @@ const Theme = (props: ThemeProps) => {
     return {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(cssVariable || {}), type])
+  console.log("tranVariable", tranVariable)
   if (type === "all") {
-    return React.createElement(TagName, { className, style: { ...(theme || {}), ...(style || {}) } }, <ThemeProvider theme={{ ...tranVariable, ...theme }} >{children}</ThemeProvider>)
+    return React.createElement(TagName, { className, style: { ...cssVariable, ...(style || {}) } }, <ThemeProvider theme={{ ...tranVariable, ...theme }} >{children}</ThemeProvider>)
   } else if (type === "theme") {
     return React.createElement(TagName, { className, style: { ...(style || {}) } }, <ThemeProvider theme={{ ...tranVariable, ...theme }} >{children}</ThemeProvider>)
   }
-  return React.createElement(TagName, { className, style: { ...(theme || {}), ...(style || {}) } }, children)
+  return React.createElement(TagName, { className, style: { ...cssVariable, ...(style || {}) } }, children)
 }
 
 export default Theme

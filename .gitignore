@@ -6,6 +6,7 @@ package-lock.json
 .DS_Store
 .cache
 .vscode
+yarn.lock
 
 *.bak
 *.tem

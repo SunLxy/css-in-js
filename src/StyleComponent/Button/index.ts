@@ -26,7 +26,7 @@ const setNumberToString = (value: number | string | undefined, unit: string = "p
 
 const getCommonCss = (style: string, attrName: string, fig?: boolean, lastName?: string) => {
   const com = css`
-    ${attrName}{${style}}
+    ${attrName && `${attrName}{${style}}`}
     ${fig && lastName && `${lastName}{${style}}`}
     ${fig && !lastName && style}
   `
@@ -128,7 +128,7 @@ const buttonTypeCss = (props: ButtonProps) => {
             color: ${Color("#9199a7").lighten(0.1).string()};
           `, "&[disabled]", disabled)}
         `}
-         ${() => getCommonCss(`
+        ${() => getCommonCss(`
             color:${Color("#393e48").darken(0.2).string()} ;
             z-index: 0;
           `, "&[disabled]", disabled)}
@@ -159,7 +159,6 @@ const buttonTypeCss = (props: ButtonProps) => {
       return css``
   }
 }
-
 
 
 const buttonSize = (fontSize: string, lineHeight: string, minheight: string) => {
