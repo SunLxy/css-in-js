@@ -27,6 +27,9 @@ const transformationHump = (value: string) => {
     return letter.toUpperCase();
   });
 }
+export const toLine = (name: string) => {
+  return name.replace(/([A-Z])/g, "_$1").toLowerCase();
+}
 
 const transformationVariable = (theme: ThemeProps["cssVariable"]) => {
   const Variable: Record<string, string> = {}

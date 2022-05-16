@@ -7,12 +7,20 @@ import Label from "./StyleComponent/Label"
 
 import Theme from "./themes"
 import themeJson from "./theme.json"
+import styled from "styled-components";
+
+
+const Warp = styled.span`
+ color: red;
+`
+
 function App() {
   const [count, setCount] = React.useState(1)
 
   return (
     <div className="body" >
       <dark-mode permanent></dark-mode>
+      <Warp as={Button}>测试 as </Warp>
       <div className="one" >
         第一个块测试{count}
       </div>
