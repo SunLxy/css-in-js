@@ -48,6 +48,8 @@ const getCommonCss = (
   return com;
 };
 
+console.log(Color("#0080D8").darken(0.1).hex());
+
 const buttonVariant = (
   color: string,
   background: string,
