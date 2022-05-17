@@ -5,3 +5,6 @@
   cursor: pointer;
   position: relative;
 }
+.color-list label {
+  margin-right: 10px;
+}
