@@ -7,16 +7,20 @@ import Label from "./StyleComponent/Label"
 
 import Theme from "./themes"
 import themeJson from "./theme.json"
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import ColorList from "./StyleComponent/List"
 
 
-const Warp2 = styled.button`
+const Warp2 = styled.button<any>`
  background-color: red;
  ${props => {
     console.log("测试呢绒", props)
     return ''
   }}
+${props => props.dot && css`
+  border-color: red;
+`}
+
 `
 
 export type GetStyledCloneComponentProps<T = any, M = Record<string, any>> = {
@@ -59,7 +63,14 @@ const Demos = (props: any) => {
   const { children } = props
   return <div>
     {React.Children.map(children, (child,) => {
-      return <Warp2 as={GetStyledCloneComponent} a={21} >{child}</Warp2>
+      const isValidElement = React.isValidElement(child)
+      let dot = "";
+      if (isValidElement) {
+        const childProps: any = child.props
+        dot = childProps?.className || false
+      }
+
+      return <Warp2 dot={dot === "dot"} as={GetStyledCloneComponent} a={21} >{child}</Warp2>
     })}
   </div>
 }
@@ -80,11 +91,11 @@ function App() {
         <div>
           <Demos >
             这是测试clone时候处理数据的
-            <br />
+            <hr className="dot" />
             <button className="原始className" >测试button按钮</button>
             <button  >测试button按钮</button>
+            <hr className="dog" />
           </Demos>
-          <br />
         </div>
         <Warp as={Button}>测试 as </Warp>
         <div className="one" >
