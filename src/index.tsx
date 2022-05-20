@@ -6,8 +6,36 @@ import "./index.css"
 import Theme from "./themes"
 import themeJson from "./theme.json"
 
+import styled, { css } from "styled-components";
+
+
+interface DemoProps {
+  defaultTheme?: any
+}
+
+const getCss = (props: any) => {
+  console.log("props----->", props)
+  return css`
+    &.btn{
+      background-color: red;
+    }
+  `
+}
+
+const Demo = styled.div<DemoProps>`
+  &.params{
+    ${(props) => getCss(props)}
+  }
+`
+Demo.defaultProps = {
+  defaultTheme: {
+    fontColor: "red"
+  }
+}
+
 ReactClient.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+
     <Theme
       type="theme"
       cssVariable={themeJson}
@@ -16,6 +44,7 @@ ReactClient.createRoot(document.getElementById('root')!).render(
       }}
     >
       <App />
+      <Demo className="params btn" >参数</Demo>
     </Theme>
   </React.StrictMode>,
 );

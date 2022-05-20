@@ -8,8 +8,62 @@ import Label from "./StyleComponent/Label"
 import Theme from "./themes"
 import themeJson from "./theme.json"
 import styled from "styled-components";
-
 import ColorList from "./StyleComponent/List"
+
+
+const Warp2 = styled.button`
+ background-color: red;
+ ${props => {
+    console.log("测试呢绒", props)
+    return ''
+  }}
+`
+
+export type GetStyledCloneComponentProps<T = any, M = Record<string, any>> = {
+  children?: React.ReactNode;
+  /** 处理的子集传递的参数 **/
+  oProps?: T & { className?: string };
+  /** 是否拼接原始的className */
+  isChildClassName?: boolean;
+  /** 这个字段不使用，只是内部使用的 **/
+  className?: string;
+} & M;
+
+/**
+ * styled-components 当遇到 clone 子集的时候，利用 as 功能进行转换
+ *
+ * 原来：React.cloneElement(child,child.props)
+ *
+ * 新的：
+ * const Demo = styled.div``
+ * <Demo as={GetStyledCloneComponent} >${child}</Demo>
+ *
+ *
+ *  **/
+export const GetStyledCloneComponent = (
+  props: GetStyledCloneComponentProps,
+) => {
+  const { children, oProps, isChildClassName = true, className: styleClassName } = props;
+  if (React.isValidElement(children)) {
+    const { className: oClassName = '', ...rest } = oProps || {};
+    const childProps = children?.props || {};
+    const className = childProps?.className || '';
+    const oldCls = isChildClassName ? className : '';
+    const cls = [oldCls].concat([oClassName]).concat([styleClassName]).filter(ite => ite && ite.trim()).join(" ");
+    return React.cloneElement(children, { ...(childProps || {}), ...rest, className: cls });
+  }
+  return React.createElement(React.Fragment, { children });
+};
+
+const Demos = (props: any) => {
+  const { children } = props
+  return <div>
+    {React.Children.map(children, (child,) => {
+      return <Warp2 as={GetStyledCloneComponent} a={21} >{child}</Warp2>
+    })}
+  </div>
+}
+
 const Warp = styled.span`
  color: red;
 `
@@ -20,6 +74,17 @@ function App() {
   return (
     <div className="body" >
       <dark-mode permanent></dark-mode>
+      <div>
+        <Demos >
+          这是测试clone时候处理数据的
+          <br />
+          <button className="原始className" >测试button按钮</button>
+          <button  >测试button按钮</button>
+        </Demos>
+        <br />
+      </div>
+
+
       <Button types={show ? "primary" : "light"} onClick={() => setShow(true)} >测试demo</Button>
       <Button types={!show ? "primary" : "light"} onClick={() => setShow(false)} >颜色列表</Button>
       <div style={{ display: show ? "block" : "none" }} >
