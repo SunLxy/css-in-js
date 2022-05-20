@@ -74,20 +74,21 @@ function App() {
   return (
     <div className="body" >
       <dark-mode permanent></dark-mode>
-      <div>
-        <Demos >
-          这是测试clone时候处理数据的
-          <br />
-          <button className="原始className" >测试button按钮</button>
-          <button  >测试button按钮</button>
-        </Demos>
-        <br />
-      </div>
+
 
 
       <Button types={show ? "primary" : "light"} onClick={() => setShow(true)} >测试demo</Button>
       <Button types={!show ? "primary" : "light"} onClick={() => setShow(false)} >颜色列表</Button>
       <div style={{ display: show ? "block" : "none" }} >
+        <div>
+          <Demos >
+            这是测试clone时候处理数据的
+            <br />
+            <button className="原始className" >测试button按钮</button>
+            <button  >测试button按钮</button>
+          </Demos>
+          <br />
+        </div>
         <Warp as={Button}>测试 as </Warp>
         <div className="one" >
           第一个块测试{count}
