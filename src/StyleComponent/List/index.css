@@ -8,3 +8,17 @@
 .color-list label {
   margin-right: 10px;
 }
+.copy-node {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 90px;
+  z-index: 9999;
+  background-color: #66ff00;
+  padding: 10px;
+  border-radius: 3px;
+  color: #9900ff;
+  text-align: center;
+}

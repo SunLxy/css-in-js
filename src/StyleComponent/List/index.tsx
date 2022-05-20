@@ -91,10 +91,12 @@ const getListColor = (value: string, ratio: number | string, type: string) => {
     mix,
   }
 }
-const Copy = (text: string,) => {
+const Copy = (text: string, coptCallBack: any) => {
   if (navigator.clipboard) {
     // clipboard api 复制
     navigator.clipboard.writeText(text);
+    coptCallBack()
+
   }
 }
 
@@ -102,6 +104,22 @@ const List = () => {
   const [colors, setColors] = React.useState("")
   const [ratio, setRatio] = React.useState<string | number>("")
   const [type, setType] = React.useState<string>("hex")
+
+  const [copySuccess, setCopySuccess] = React.useState(false)
+  const timer = React.useRef<any>(null)
+
+  const coptCallBack = () => {
+    clearTimeout(timer.current)
+    setCopySuccess(true)
+    timer.current = setTimeout(() => {
+      setCopySuccess(false)
+      clearTimeout(timer.current)
+    }, 2000);
+  }
+  React.useEffect(() => {
+    return () => clearTimeout(timer.current)
+  }, [])
+
   const ColorList = React.useMemo(() => {
     if (colors) {
       return Object.entries(getListColor(colors, ratio, type)).map(([key, valueList]) => {
@@ -113,7 +131,7 @@ const List = () => {
               // @ts-ignore
               if (event.target && event.target.dataset && event.target.dataset.color) {
                 // @ts-ignore
-                Copy(event.target.dataset.color)
+                Copy(event.target.dataset.color, coptCallBack)
               }
             }} key={index} className="color-item" data-color={item} style={{ backgroundColor: item, color: isDark ? "#fff" : "#000" }} >{item}</span>
           })}
@@ -163,6 +181,7 @@ const List = () => {
 
     </label>
     {ColorList}
+    <span style={{ display: copySuccess ? "block" : "none" }} className="copy-node" >复制成功</span>
   </div>
 }
 export default List
