@@ -74,9 +74,6 @@ function App() {
   return (
     <div className="body" >
       <dark-mode permanent></dark-mode>
-
-
-
       <Button types={show ? "primary" : "light"} onClick={() => setShow(true)} >测试demo</Button>
       <Button types={!show ? "primary" : "light"} onClick={() => setShow(false)} >颜色列表</Button>
       <div style={{ display: show ? "block" : "none" }} >
